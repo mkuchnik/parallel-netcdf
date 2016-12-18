@@ -1,21 +1,5 @@
 language: c
 
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "SibDJMem3EQ4S-5I1P9YdA"
-
-addons:
-  coverity_scan:
-    project:
-      name: "Parallel-Netcdf"
-      description: "PnetCDF nightly build submitted via Travis CI"
-    notification_email: wkliao@eecs.northwestern.edu
-    build_command_prepend: "./configure; make clean"
-    build_command:   "make ; make tests"
-    branch_pattern: 1-8-0pre1
-
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - test -n $CC && unset CC
